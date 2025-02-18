@@ -1,0 +1,34 @@
+<div class="container">
+  <!-- Banner que se muestra cuando no hay conexión a internet -->
+  <div *ngIf="isOffline" class="offline-banner">
+    Estás sin conexión. Los cambios se guardarán localmente y se sincronizarán cuando haya conexión.
+  </div>  
+  <div>
+    <h1>Hoja de Notas</h1>
+  
+    <!-- Formulario para agregar una nueva nota -->
+    <form (submit)="addNote()">
+      <!-- Campo de entrada para el título de la nota -->
+      <input [(ngModel)]="newNote.title" placeholder="Título" name="title" required />
+      <!-- Campo de texto para el contenido de la nota -->
+      <textarea [(ngModel)]="newNote.content" placeholder="Contenido" name="content" required></textarea>
+      <!-- Botón para enviar el formulario y agregar la nota -->
+      <button type="submit">Agregar Nota</button>
+    </form>
+  
+    <!-- Lista de notas existentes -->
+    <ul>
+      <!-- Itera sobre las notas y muestra cada una -->
+      <li *ngFor="let note of notes">
+        <!-- Muestra el título de la nota -->
+        <h3>{{ note.title }}</h3>
+        <!-- Muestra el contenido de la nota -->
+        <p>{{ note.content }}</p>
+        <!-- Muestra la fecha de creación de la nota -->
+        <small>{{ note.createdAt | date }}</small>
+        <!-- Botón para eliminar la nota -->
+        <button (click)="deleteNote(note.id!)">Eliminar</button>
+      </li>
+    </ul>
+  </div>
+</div>
